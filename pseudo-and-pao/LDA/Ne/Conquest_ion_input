@@ -1,0 +1,13 @@
+General.NumberOfSpecies 1
+# We want the 2s to be valence, so adjust the cutoff
+General.SemicoreEnergy -1.4
+
+%block SpeciesLabels
+1  Ne
+%endblock
+
+%block Ne
+Atom.PseudopotentialFile Ne.in
+Atom.VKBFile Ne.pot
+Atom.BasisSize medium
+%endblock

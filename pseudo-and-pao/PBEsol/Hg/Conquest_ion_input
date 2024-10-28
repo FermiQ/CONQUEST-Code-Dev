@@ -1,0 +1,13 @@
+General.NumberOfSpecies 1
+# If you want the 5d shell to be semi-core, uncomment the line below
+# General.SemicoreEnergy -0.35
+
+%block SpeciesLabels
+1  Hg
+%endblock
+
+%block Hg
+Atom.PseudopotentialFile Hg.in
+Atom.VKBFile Hg.pot
+Atom.BasisSize medium
+%endblock
