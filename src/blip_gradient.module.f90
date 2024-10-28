@@ -16,10 +16,11 @@
 !!  CREATION DATE
 !!   08:25, 2003/04/03 dave
 !!  MODIFICATION HISTORY
-!!   10:09, 13/02/2006 drb 
+!!   10:09, 13/02/2006 drb
 !!    Removed all explicit references to data_ variables and rewrote
 !!    in terms of new
 !!    matrix routines
+!!    in terms of new matrix routines
 !!   2008/05/25 ast
 !!    Added timers
 !!   26/10/09 drb
@@ -36,7 +37,7 @@ module blip_gradient
                                     tmr_std_allocation,      &
                                     tmr_std_matrices
   use timer_module,           only: start_timer, stop_timer
-                                    
+
   implicit none
 
 !!***
@@ -49,16 +50,16 @@ contains
 
   !!****f* blip_gradient/get_blip_gradient *
   !!
-  !!  NAME 
+  !!  NAME
   !!   get_blip_gradient
   !!  USAGE
-  !! 
+  !!
   !!  PURPOSE
   !!   Evaluates the gradient of energy wrt blip coefficients
   !!  INPUTS
-  !! 
+  !!
   !!  USES
-  !! 
+  !!
   !!  AUTHOR
   !!   C.M.Goringe
   !!  CREATION DATE
@@ -146,7 +147,7 @@ contains
     real(double), dimension(:,:,:), allocatable :: this_data_K
 
     call start_timer(tmr_std_eminimisation)
-    
+
     ! first, get the gradient of energy wrt the support functions.
     ! this does NOT include the change in energy due to the change in the
     ! KE matrix, but it DOES include the change in KE due to the change
@@ -178,7 +179,7 @@ contains
        this_data_K = zero
 
        call start_timer(tmr_std_matrices)
-       
+
        do np = 1, bundle%groups_on_node
           do nn = 1, bundle%nm_nodgroup(np)
              if (nsf_species(bundle%species(i)) /= this_nsf) then
@@ -232,7 +233,7 @@ contains
     call scal(gridfunctions(H_on_atomfns(1))%size, grid_point_volume,&
               gridfunctions(H_on_atomfns(1))%griddata, 1)
 
-    ! and then 
+    ! and then
     call inverse_blip_transform_new(inode-1, H_on_atomfns(1), &
                                     support_gradient, bundle%n_prim)
 
@@ -249,7 +250,7 @@ contains
                           stat)
        call reg_alloc_mem(area_minE, this_nsf * this_nsf * nspin, type_dbl)
        call stop_timer (tmr_std_allocation)
-       
+
        call start_timer (tmr_std_matrices)
        do np = 1, bundle%groups_on_node
           do nn = 1,bundle%nm_nodgroup(np)
@@ -263,13 +264,13 @@ contains
                 allocate(this_data_K(this_nsf,this_nsf,nspin))
                 call stop_timer(tmr_std_allocation)
              end if
-             
+
              this_data_K = zero
              do spin = 1, nspin
                 call return_matrix_block_pos(matK(spin),                &
                                              mat(np,Hrange)%onsite(nn), &
                                              this_data_K(:,:,spin),      &
-                                             this_nsf * this_nsf)                
+                                             this_nsf * this_nsf)
                 ! spin_factor correction for spin non-polarsed
                 ! calculation is done inside get_onsite_KE_gradient
                 call get_onsite_KE_gradient(blips_on_atom(i), &
@@ -311,10 +312,10 @@ contains
     ! onsite parts of the K matrix (because KE = Tr[KT], this is
     ! equivalent to removing the onsite parts of T, and somewhat easier!
     !
-    ! first, for x: do the blip_grad transform into workspace_support 
+    ! first, for x: do the blip_grad transform into workspace_support
     if(.NOT.flag_analytic_blip_int) then
        tmp_fn = allocate_temp_fn_on_grid(sf)
-       do direction = 1, 3 
+       do direction = 1, 3
           call blip_to_grad_new(inode-1, direction, H_on_atomfns(1))
           ! now act with K - result into workspace2_support
           gridfunctions(tmp_fn)%griddata = zero
@@ -343,26 +344,26 @@ contains
   ! -----------------------------------------------------------
   ! Subroutine get_electron_gradient
   ! -----------------------------------------------------------
-  
+
   !!****f* blip_gradient/get_electron_gradient *
   !!
-  !!  NAME 
+  !!  NAME
   !!   get_electron_gradient
   !!  USAGE
-  !! 
+  !!
   !!  PURPOSE
   !!   This subroutine obtains the gradient of the electron
   !!   number with respect to the support functions on
   !!   the grid. The gradient with respect to
   !! |phi_i> at grid point n is given by
   !!   24 sum_j (LSLij  - LSLSLij) |phi_j(n)>
-  !! 
-  !!   M4 = 24 (LSL - LSLSL) 
+  !!
+  !!   M4 = 24 (LSL - LSLSL)
   !!  INPUTS
-  !! 
-  !! 
+  !!
+  !!
   !!  USES
-  !! 
+  !!
   !!  AUTHOR
   !!   E.H.Hernandez
   !!  CREATION DATE
@@ -422,11 +423,11 @@ contains
     call scal(gridfunctions(electron_gradient)%size, &
               - spin_factor * grid_point_volume,     &
               gridfunctions(electron_gradient)%griddata, 1)
-    
+
     call inverse_blip_transform_new(inode-1, electron_gradient, &
                                     support_elec_gradient,      &
                                     bundle%n_prim)
-    
+
     return
   end subroutine get_electron_gradient
   !!***
@@ -434,29 +435,29 @@ contains
   ! -----------------------------------------------------------
   ! Subroutine get_support_gradient
   ! -----------------------------------------------------------
-  
+
   !!****f* blip_gradient/get_support_gradient *
   !!
-  !!  NAME 
+  !!  NAME
   !!   get_support_gradient
   !!  USAGE
-  !! 
+  !!
   !!  PURPOSE
   !!   This subroutine obtains the gradient of the total
   !!   energy with respect to the support functions on
   !!   the grid. The gradient of E with respect to
   !!   |phi_i> at grid point n is given by
   !!
-  !!    dE/d|phi_i(n)> = 4 sum_j 
+  !!    dE/d|phi_i(n)> = 4 sum_j
   !!            (      Kij H +          <- Type I
   !!                   M1ij - M2ij    )   <- Type II
   !!   |phi_j(n)>
-  !! 
-  !!    where H is the Hamiltonian operator (not its 
-  !!    matrix representation), which must be made to 
+  !!
+  !!    where H is the Hamiltonian operator (not its
+  !!    matrix representation), which must be made to
   !!    act on |phi_j>, and the matrices M1 and M2 are
   !!    defined as
-  !!    M1 = 3 LHL 
+  !!    M1 = 3 LHL
   !!    M2 = 2 LSLHL + LHLSL
   !!    respectively.
   !!
@@ -467,12 +468,12 @@ contains
   !!    seperately.
   !!    See Notes 24/2/96 pp9-10 and Conquest paper IV for KE discussion,
   !!        Notes 31/1/97 pp1-5 for Non-Local energy
-  !! 
+  !!
   !!  INPUTS
-  !! 
-  !! 
+  !!
+  !!
   !!  USES
-  !! 
+  !!
   !!  AUTHOR
   !!   E.H.Hernandez
   !!  CREATION DATE
@@ -556,7 +557,7 @@ contains
 
     ! first, act on h_on_atomfns (which holds H |atomf> on entry)
     ! with the K matrix) to get type I variation
-    
+
     ! L.Tong: act_on_vectors_new is accumulative, we use this to our advantage
     if (WhichPulay == PhiPulay .or. WhichPulay == BothPulay) then
        do spin = 1, nspin
@@ -579,7 +580,7 @@ contains
        call scal(gridfunctions(tmp_fn(spin))%size, minus_two, &
                  gridfunctions(tmp_fn(spin))%griddata, 1)
     end do
-    
+
     ! get the total support gradient
     gridfunctions(support_gradient)%griddata = zero
     do spin = 1, nspin
@@ -600,21 +601,21 @@ contains
   ! -----------------------------------------------------------
   ! Subroutine get_non_local_gradient
   ! -----------------------------------------------------------
-  
+
   !!****f* blip_gradient/get_non_local_gradient *
   !!
-  !!  NAME 
+  !!  NAME
   !!   get_non_local_gradient
   !!  USAGE
-  !! 
+  !!
   !!  PURPOSE
   !!   accumulates the gradient of energy due to type 1
   !!   variations of the non-local energy onto the grid
   !!  INPUTS
-  !! 
-  !! 
+  !!
+  !!
   !!  USES
-  !! 
+  !!
   !!  AUTHOR
   !!   C.M.Goringe
   !!  CREATION DATE
@@ -625,7 +626,7 @@ contains
   !!    Changed act_on_vector, added ROBODoc header, indented
   !!   23/05/2001 dave
   !!    Shortened subroutine call
-  !!   15:42, 04/02/2003 drb 
+  !!   15:42, 04/02/2003 drb
   !!    Changed to use temp_TCS (problem with transposes if NSF/=NCF)
   !!   08:15, 2003/04/04 dave
   !!    Included into blip_gradient
@@ -706,7 +707,7 @@ contains
              this_nsf = nsf_species(spec)
              do nab = 1, mat(np,APrange)%n_nab(nn) ! Loop over neighbours of atom
                 ist = mat(np,APrange)%i_acc(nn) + nab - 1
-                ! Build the distances between atoms - needed for phases 
+                ! Build the distances between atoms - needed for phases
                 gcspart = &
                      BCS_parts%icover_ibeg(mat(np,APrange)%i_part(ist)) + &
                      mat(np,APrange)%i_seq(ist) - 1
@@ -716,7 +717,7 @@ contains
                 dz = BCS_parts%zcover(gcspart) - bundle%zprim(iprim)
                 ! We need to know the species of neighbour
                 neigh_global_part = &
-                     BCS_parts%lab_cell(mat(np,APrange)%i_part(ist)) 
+                     BCS_parts%lab_cell(mat(np,APrange)%i_part(ist))
                 neigh_global_num  = &
                      id_glob(parts%icell_beg(neigh_global_part) + &
                              mat(np,APrange)%i_seq(ist) - 1)
@@ -755,26 +756,26 @@ contains
     return
   end subroutine get_non_local_gradient
   !!***
-  
+
 
   !!****f* blip_gradient/get_onsite_KE_gradient *
   !!
-  !!  NAME 
+  !!  NAME
   !!   get_onsite_KE_gradient
   !!  USAGE
-  !! 
+  !!
   !!  PURPOSE
   !!   This routine accumulates onto the blip gradient the derivative in
   !!   KE due to the change in T wrt the blip coefficients
   !!  INPUTS
-  !! 
-  !! 
+  !!
+  !!
   !!  USES
-  !! 
+  !!
   !!  AUTHOR
   !!   C.M.Goringe
   !!  CREATION DATE
-  !!   18/11/96 
+  !!   18/11/96
   !!  MODIFICATION HISTORY
   !!   16/05/2001 dave
   !!    F90, ROBODoc and:
@@ -1002,18 +1003,18 @@ contains
 
   !!****f* blip_gradient/get_onsite_S_gradient *
   !!
-  !!  NAME 
+  !!  NAME
   !!   get_onsite_S_gradient
   !!  USAGE
-  !! 
+  !!
   !!  PURPOSE
   !!   This routine accumulates onto the blip gradient the derivative in
   !!   energy due to the change in onsite S wrt the blip coefficients
   !!  INPUTS
-  !! 
-  !! 
+  !!
+  !!
   !!  USES
-  !! 
+  !!
   !!  AUTHOR
   !!   D.R.Bowler
   !!  CREATION DATE
@@ -1185,3 +1186,5 @@ contains
   !!***
 
 end module blip_gradient
+
+
