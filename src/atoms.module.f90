@@ -42,7 +42,13 @@ module atoms
   integer :: n_my_atoms
 
   integer, dimension(:), allocatable :: index_my_atoms, node_doing_atom, atom_number_on_node, n_atoms_on_node
+  ! index_my_atoms: Array containing indices of atoms on the current node.
+  ! node_doing_atom: Array indicating which node is handling each atom.
+  ! atom_number_on_node: Array mapping global atom ID to its index on the node.
+  ! n_atoms_on_node: Array storing the number of atoms on each node.
+
   integer, dimension(:,:), allocatable :: atoms_on_node
+  ! atoms_on_node: 2D array mapping atom index on a node to its global ID.
 
 
 !!***
@@ -64,8 +70,8 @@ contains
 !!   creates tables for switch back and forth between the
 !!   node-list and global list.
 !!  INPUTS
-!! 
-!! 
+!!   inode: The current node ID.
+!!   ionode: The node ID for output.
 !!  USES
 !! 
 !!  AUTHOR
