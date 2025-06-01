@@ -1,32 +1,35 @@
 ## Overview
-DUMMY module.
-Allows people to run Conquest O(N) only without Scalapack or BLACS.
-This is a DUMMY module designed to allow those without BLACS and SCALAPACK to compile and run Conquest for order N only.
+[Please provide a brief description of this file's purpose and role.]
 
 ## Key Components
 
 ### Modules
-- `DiagModule`: DUMMY module. Allows people to run Conquest O(N) only without Scalapack or BLACS
+[List of MODULE names and brief descriptions, e.g.:
+- `module_name_1`: Brief description of what this module does.
+- `module_name_2`: Brief description of what this module does.
+]
 
 ### Subroutines
-- `FindEvals(electrons)`: FindEvals - returns an error and stops. Stop a user without SCALAPACK and BLACS trying to diagonalise
+[List of SUBROUTINE names/signatures and brief descriptions, e.g.:
+- `subroutine_name_1(arg1, arg2)`: Brief description of what this subroutine does.
+  - `arg1` (type): Description of argument 1.
+  - `arg2` (type): Description of argument 2.
+- `subroutine_name_2()`: Brief description of what this subroutine does.
+]
 
 ### Functions
-None found in this file.
+[List of FUNCTION names/signatures and brief descriptions, e.g.:
+- `function_name_1(arg1)` (`result_type`): Brief description of what this function does.
+  - `arg1` (type): Description of argument 1.
+  - `result_name` (`result_type`): Description of the result.
+- `function_name_2()` (`result_type`): Brief description of what this function does.
+]
 
 ## Important Variables/Constants
-- `nkp (integer)`: [Add description - k-point related]
-- `wtk (real(double), allocatable, dimension(:))`: [Add description - k-point weights]
-- `kk (real(double), allocatable, dimension(:,:))`: [Add description - k-point coordinates]
-- `kT (real(double))`: [Add description - Smearing temperature for occupations]
-- `maxefermi (integer)`: [Add description - Max iterations for Fermi energy search]
-- `flag_smear_type (integer)`: [Add description - Smearing type flag]
-- `iMethfessel_Paxton (integer)`: [Add description - Methfessel-Paxton order]
-- `gaussian_height (real(double))`: [Add description - Gaussian height for smearing]
-- `finess (real(double))`: [Add description - Finess parameter for smearing]
-- `NElec_less (real(double))`: [Add description - Electron count parameter for smearing]
-- `max_brkt_iterations (integer)`: [Add description - Max bracket iterations for Fermi search]
-- `diagon (logical)`: [Add description - Flag for diagonalization vs O(N)]
+[List of important variable/constant names, their types (if determinable), and descriptions of their purpose, especially for parameters or widely used variables. E.g.:
+- `variable_name_1` (`type`): Description of its purpose. (Parameter/Constant)
+- `variable_name_2` (`type`): Description of its purpose.
+]
 
 ## Usage Examples
 To be added by developers.
@@ -34,8 +37,10 @@ To be added by developers.
 ## Dependencies and Interactions
 
 ### Used Modules
-- `datatypes`
-- `GenComms, only: cq_abort`
+[List of modules imported via USE statements, e.g.:
+- `used_module_1`
+- `used_module_2 (only: specific_entity_1, specific_entity_2)`
+]
 
 ### Called Subroutines/Functions (if determinable)
 [List of other subroutines/functions within the project that this file calls. E.g.:
