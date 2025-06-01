@@ -1,41 +1,35 @@
 ## Overview
-Calculates the coefficients used to relate an energy 
-tolerance (i.e. dE) to a residual by a process of least
-squares fitting, subject to the fit being below all points.
-
-Conquest makes extensive use of residual minimisation 
-techniques, and we need a way to relate a tolerance on the
-energy (which is easily specified by the user) to the
-magnitude of the residual -- hence this routine.
+[Please provide a brief description of this file's purpose and role.]
 
 ## Key Components
 
 ### Modules
-- `PosTan`: Calculates the coefficients used to relate an energy tolerance (i.e. dE) to a residual by a process of least squares fitting, subject to the fit being below all points.
+[List of MODULE names and brief descriptions, e.g.:
+- `module_name_1`: Brief description of what this module does.
+- `module_name_2`: Brief description of what this module does.
+]
 
 ### Subroutines
-- `fit_coeff(C, beta, E, R, n)`: Fits the coefficients C and beta (such that the tolerance applied to the residual is C*dE^beta where dE is the energy tolerance) to the arrays E and R
-- `pos_tan(mxnpt,npt,xpt,ypt,cconst,bslope,myid)`: This subroutine performs the fitting described above.
+[List of SUBROUTINE names/signatures and brief descriptions, e.g.:
+- `subroutine_name_1(arg1, arg2)`: Brief description of what this subroutine does.
+  - `arg1` (type): Description of argument 1.
+  - `arg2` (type): Description of argument 2.
+- `subroutine_name_2()`: Brief description of what this subroutine does.
+]
 
 ### Functions
-None found in this file.
+[List of FUNCTION names/signatures and brief descriptions, e.g.:
+- `function_name_1(arg1)` (`result_type`): Brief description of what this function does.
+  - `arg1` (type): Description of argument 1.
+  - `result_name` (`result_type`): Description of the result.
+- `function_name_2()` (`result_type`): Brief description of what this function does.
+]
 
 ## Important Variables/Constants
-- `max_iters (integer, parameter)`: Maximum number of iterations stored for fitting (Value: 50).
-- `eprec (real(double), parameter)`: Precision for energy difference comparison (Value: 1.0e-12).
-- `cscale (real(double), parameter)`: Scaling factor for coefficient C (Value: 0.01).
-- `PulayE(max_iters) (real(double))`: Array to store energies for Pulay iterations.
-- `PulayR(max_iters) (real(double))`: Array to store residuals for Pulay iterations.
-- `SCE(max_iters) (real(double))`: Array to store energies for Self-Consistent iterations.
-- `SCR(max_iters) (real(double))`: Array to store residuals for Self-Consistent iterations.
-- `SupFnE(max_iters) (real(double))`: Array to store energies for Support Function iterations.
-- `SupFnR(max_iters) (real(double))`: Array to store residuals for Support Function iterations.
-- `PulayC (real(double))`: Fitted coefficient C for Pulay.
-- `PulayBeta (real(double))`: Fitted coefficient beta for Pulay.
-- `SCC (real(double))`: Fitted coefficient C for Self-Consistent iterations.
-- `SCBeta (real(double))`: Fitted coefficient beta for Self-Consistent iterations.
-- `SupFnC (real(double))`: Fitted coefficient C for Support Function iterations.
-- `SupFnBeta (real(double))`: Fitted coefficient beta for Support Function iterations.
+[List of important variable/constant names, their types (if determinable), and descriptions of their purpose, especially for parameters or widely used variables. E.g.:
+- `variable_name_1` (`type`): Description of its purpose. (Parameter/Constant)
+- `variable_name_2` (`type`): Description of its purpose.
+]
 
 ## Usage Examples
 To be added by developers.
@@ -43,12 +37,10 @@ To be added by developers.
 ## Dependencies and Interactions
 
 ### Used Modules
-- `datatypes`
-- `global_module, ONLY: io_lun, area_general, iprint_gen`
-- `numbers`
-- `GenComms, ONLY: inode, ionode, cq_abort`
-- `memory_module, ONLY: reg_alloc_mem, reg_dealloc_mem, type_dbl`
-- `functions, ONLY: heapsort_real_index`
+[List of modules imported via USE statements, e.g.:
+- `used_module_1`
+- `used_module_2 (only: specific_entity_1, specific_entity_2)`
+]
 
 ### Called Subroutines/Functions (if determinable)
 [List of other subroutines/functions within the project that this file calls. E.g.:

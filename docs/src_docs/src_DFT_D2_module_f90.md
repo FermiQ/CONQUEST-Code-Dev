@@ -1,39 +1,35 @@
 ## Overview
-! Module DFT_D2
-! Code area 9: general
-!!****h* Conquest_DFT_D2 *
-!! NAME
-!!  DFT_D2
-!! PURPOSE
-!!  Stores various useful dimensions and a subroutine
-!! USES
-!! AUTHOR
-!!  M. Arita
-!! CREATION DATE
-!!  11/06/09 M. Arita
-!! MODIFICATION HISTORY
-!!  2022/06/09 12:27 dave
-!!   Moved disp_energy to energy module, partition_distance taken
-!!   from ion_electrostatic
-!! SOURCE
+[Please provide a brief description of this file's purpose and role.]
 
 ## Key Components
 
 ### Modules
-- `DFT_D2`: Stores various useful dimensions and a subroutine
+[List of MODULE names and brief descriptions, e.g.:
+- `module_name_1`: Brief description of what this module does.
+- `module_name_2`: Brief description of what this module does.
+]
 
 ### Subroutines
-- `dispersion_D2()`: dispersion_D2: Compute the dispersion interaction and the atomic fores
-- `set_para_D2()`: set_para_D2: Reads and stores the necessary parameters in the DFT-D2 scheme
+[List of SUBROUTINE names/signatures and brief descriptions, e.g.:
+- `subroutine_name_1(arg1, arg2)`: Brief description of what this subroutine does.
+  - `arg1` (type): Description of argument 1.
+  - `arg2` (type): Description of argument 2.
+- `subroutine_name_2()`: Brief description of what this subroutine does.
+]
 
 ### Functions
-None found in this file.
+[List of FUNCTION names/signatures and brief descriptions, e.g.:
+- `function_name_1(arg1)` (`result_type`): Brief description of what this function does.
+  - `arg1` (type): Description of argument 1.
+  - `result_name` (`result_type`): Description of the result.
+- `function_name_2()` (`result_type`): Brief description of what this function does.
+]
 
 ## Important Variables/Constants
-- `disp_force(:, :)` (`real(double), allocatable`): Stores dispersion forces.
-- `atm_disp_coeff(:)` (`real(double), allocatable`): Atomic dispersion coefficients.
-- `vdW_rad(:)` (`real(double), allocatable`): Van der Waals radii.
-- `disp_stress(3,3)` (`real(double)`): Dispersion contribution to stress tensor.
+[List of important variable/constant names, their types (if determinable), and descriptions of their purpose, especially for parameters or widely used variables. E.g.:
+- `variable_name_1` (`type`): Description of its purpose. (Parameter/Constant)
+- `variable_name_2` (`type`): Description of its purpose.
+]
 
 ## Usage Examples
 To be added by developers.
@@ -41,21 +37,10 @@ To be added by developers.
 ## Dependencies and Interactions
 
 ### Used Modules
-- `datatypes`
-- `energy, only: disp_energy`
-- `cover_module, ONLY: D2_CS, make_CS`
-- `units`
-- `dimens, ONLY: atomicnum, r_dft_d2, r_super_x, r_super_y, r_super_z`
-- `GenComms, ONLY: cq_abort, gcopy, inode, ionode, gsum, &`
-- `group_module, ONLY: parts`
-- `global_module, ONLY: io_lun, numprocs, &`
-- `numbers`
-- `primary_module, ONLY: bundle`
-- `io_module, ONLY: get_file_name`
-- `species_module, ONLY: n_species, species_label`
-- `input_module, ONLY: io_assign, io_close`
-- `XC, ONLY: s_6`
-- `ion_electrostatic, ONLY: partition_distance`
+[List of modules imported via USE statements, e.g.:
+- `used_module_1`
+- `used_module_2 (only: specific_entity_1, specific_entity_2)`
+]
 
 ### Called Subroutines/Functions (if determinable)
 [List of other subroutines/functions within the project that this file calls. E.g.:

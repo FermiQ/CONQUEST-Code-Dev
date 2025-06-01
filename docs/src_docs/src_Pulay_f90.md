@@ -1,20 +1,29 @@
 ## Overview
-Collects together routines used in doing Pulay-type
-minimisation.  At present only finds the values for
-mixing the different iterations
+[Please provide a brief description of this file's purpose and role.]
 
 ## Key Components
 
 ### Modules
-- `Pulay`: Collects together routines used in doing Pulay-type minimisation.
+[List of MODULE names and brief descriptions, e.g.:
+- `module_name_1`: Brief description of what this module does.
+- `module_name_2`: Brief description of what this module does.
+]
 
 ### Subroutines
-- `DoPulay_nospin(Aij, al, n, max_n)`: Given the matrix A, inverts and sums to create the coefficients alpha (1D Aij array).
-- `DoPulay2D_nospin(iPulay, Aij, al, n, max_n)`: As for DoPulay_nospin, but allows the A matrix to be a proper 2D array.
-- `DoPulay_spin(iPulay, Aij, alpha, n, max_n)`: Calculates pulay cofficients for spin polarised calculations.
+[List of SUBROUTINE names/signatures and brief descriptions, e.g.:
+- `subroutine_name_1(arg1, arg2)`: Brief description of what this subroutine does.
+  - `arg1` (type): Description of argument 1.
+  - `arg2` (type): Description of argument 2.
+- `subroutine_name_2()`: Brief description of what this subroutine does.
+]
 
 ### Functions
-None found in this file.
+[List of FUNCTION names/signatures and brief descriptions, e.g.:
+- `function_name_1(arg1)` (`result_type`): Brief description of what this function does.
+  - `arg1` (type): Description of argument 1.
+  - `result_name` (`result_type`): Description of the result.
+- `function_name_2()` (`result_type`): Brief description of what this function does.
+]
 
 ## Important Variables/Constants
 [List of important variable/constant names, their types (if determinable), and descriptions of their purpose, especially for parameters or widely used variables. E.g.:
@@ -28,11 +37,10 @@ To be added by developers.
 ## Dependencies and Interactions
 
 ### Used Modules
-- `global_module, ONLY: io_lun, flag_fix_spin_population, ne_in_cell, nspin`
-- `GenComms, ONLY: inode, ionode, cq_warn`
-- `datatypes`
-- `GenBlas, ONLY: sytrf, sytri`
-- `numbers`
+[List of modules imported via USE statements, e.g.:
+- `used_module_1`
+- `used_module_2 (only: specific_entity_1, specific_entity_2)`
+]
 
 ### Called Subroutines/Functions (if determinable)
 [List of other subroutines/functions within the project that this file calls. E.g.:
